@@ -1,0 +1,32 @@
+<div class="bg-dark" style="padding: 20px">
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block body_block %}
+        <div class="bg-dark text-white  m-5 " style="padding: 25px;margin-top: 20px">
+            <h2 class=" font-weight-bold">Comments...</h2>
+            <div class="container">
+
+                <div class="row">
+                    {% for x in comments %}
+                        <div class="font-weight-bold " style="font-size: 0.9rem">{{ x.user }}</div>
+                        <p><i>
+                            {{ x.comment_body }}</i></p>
+                        <hr>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group border border-white border-5">
+                        <textarea name="comment_body" class="form-control text-white font-italic" rows="3" style="font-size: 0.9rem">Write your comments here..</textarea>
+                    </div>
+                    <button type="submit" class="bg-info btn btn-lg font-weight-bold text-white text-center"
+                            style="border-radius: 5px">Submit
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    {% endblock %}
+</div>

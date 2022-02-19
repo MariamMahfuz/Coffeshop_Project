@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body_block %}
+    <div class="row mt-5 ">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 bg-dark">
+            {% if messages %}
+
+                {% for message in messages %}
+                    <div class="alert alert-info">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+            {% endif %}
+            <form method="POST" style=" padding:30px;border-radius:10px">
+                {% csrf_token %}
+                <h2>Register Your Account</h2>
+                <label for="username" style="font-size: 0.9rem;font-weight:550">Username</label>
+                <input name="username" type="text" class="form-control " id="userName" required>
+
+                <label for="mail" style="font-size: 0.9rem;font-weight:550">Email</label>
+                <input name="email" type="text" class="form-control " id="userName" required>
+
+                <label for="password" style="font-size: 0.9rem;font-weight:550">Password</label>
+                <input name="password" type="text" class="form-control " id="pass" required>
+
+                <p style="text-align: right;font-size: 0.9rem;font-weight:550"><a href="{% url 'forget_password' %}"
+                                                                                  style=" text-decoration: none;">
+                    Forgot password?
+                </a></p>
+
+
+                <button type="submit" class="btn mt-4 btn-primary btn-lg btn-block">Register</button>
+                <center>
+                    <small style="font-size: 0.9rem;font-weight:450">Already have an account?<a
+                            href="{% url 'login_user' %}"
+                            style="text-decoration: none;">Log
+                        in</a> here</small>
+                </center>
+
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+{% endblock %}

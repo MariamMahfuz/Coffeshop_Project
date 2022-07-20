@@ -26,7 +26,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-8 ftco-animate">
-                    <form action="#" class="billing-form bg-dark ftco-bg-dark p-3 p-md-5">
+                    <form action="#" method="POST" class="billing-form bg-dark ftco-bg-dark p-3 p-md-5">
+                        {% csrf_token %}
                         <h3 class="mb-4 billing-heading">Billing Details</h3>
                         <div class="row align-items-end">
                             <div class="col-md-6">
@@ -47,14 +48,18 @@
                                     <label for="country">State / Country</label>
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name=" state" id="" class="form-control">
-                                            <option value="">France</option>
-                                            <option value="">Italy</option>
-                                            <option value="">Philippines</option>
-                                            <option value="">South Korea</option>
-                                            <option value="">Hongkong</option>
-                                            <option value="">Japan</option>
+
+                                        <select name="state" id="" class="form-control">
+                                            {% for x in area %}
+                                                <option value="{{ x.states }}">{{ x.states }}</option>
+                                            {% endfor %}
+                                            {#                                            <option value="">Italy</option>#}
+                                            {#                                            <option value="">Philippines</option>#}
+                                            {#                                            <option value="">South Korea</option>#}
+                                            {#                                            <option value="">Hongkong</option>#}
+                                            {#                                            <option value="">Japan</option>#}
                                         </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -111,68 +116,75 @@
                         </div>
 
 
+                        <div class="row mt-5 pt-3 d-flex">
+                            {% for x in cart_subtotal %}
+                                <div class="col-md-6 d-flex">
+                                    <div class="cart-detail cart-total ftco-bg-dark p-3 p-md-4">
+                                        <h3 class="billing-heading mb-4">Cart Total</h3>
+                                        <p class="d-flex">
+                                            <span>Subtotal</span>
+                                            <span>${{ total }}</span>
+                                        </p>
+                                        <p class="d-flex">
+                                            <span>Delivery</span>
+                                            <span>${{ delivery }}</span>
+                                        </p>
+                                        <p class="d-flex">
+                                            <span>Discount</span>
+                                            <span>${{ discount }}</span>
+                                        </p>
+                                        <hr>
+                                        <p class="d-flex total-price">
+                                            <span>Total</span>
+                                            <span>${{ subtotal }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="col-md-6">
+                                <div class="cart-detail ftco-bg-dark p-3 p-md-4">
+                                    <h3 class="billing-heading mb-4">Payment Method</h3>
 
-                    <div class="row mt-5 pt-3 d-flex">
-                        <div class="col-md-6 d-flex">
-                            <div class="cart-detail cart-total ftco-bg-dark p-3 p-md-4">
-                                <h3 class="billing-heading mb-4">Cart Total</h3>
-                                <p class="d-flex">
-                                    <span>Subtotal</span>
-                                    <span>$20.60</span>
-                                </p>
-                                <p class="d-flex">
-                                    <span>Delivery</span>
-                                    <span>$0.00</span>
-                                </p>
-                                <p class="d-flex">
-                                    <span>Discount</span>
-                                    <span>$3.00</span>
-                                </p>
-                                <hr>
-                                <p class="d-flex total-price">
-                                    <span>Total</span>
-                                    <span>$17.60</span>
-                                </p>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="radio">
+                                                <label><input type="radio" name=" direct_bank_payment" class="mr-2"> Direct
+                                                    Bank
+                                                    Tranfer</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="radio">
+                                                <label><input type="radio" name="cash_on_delivery" class="mr-2"> Check
+                                                    Payment</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="radio">
+                                                <label><input type="radio" name="paypal_payment" class="mr-2">
+                                                    Paypal</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="" class="mr-2"> I have read and
+                                                    accept
+                                                    the terms and conditions</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <center><input type="submit" class="btn btn-primary mt-5 py-3 px-4" value=" Place an order">
+                            </center>
                         </div>
-                        <div class="col-md-6">
-                            <div class="cart-detail ftco-bg-dark p-3 p-md-4">
-                                <h3 class="billing-heading mb-4">Payment Method</h3>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio" class="mr-2"> Direct Bank Tranfer</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio" class="mr-2"> Check
-                                                Payment</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio" class="mr-2"> Paypal</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" class="mr-2"> I have read and accept
-                                                the terms and conditions</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>
-                            </div>
-                        </div>
-                    </div>
-                         </form><!-- END -->
+                    </form><!-- END -->
                 </div> <!-- .col-md-8 -->
 
 
@@ -202,7 +214,7 @@
                     <div class="sidebar-box ftco-animate">
                         <h3>Recent Blog</h3>
                         <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                            <a class="blog-img mr-4" style="background-image: url(img/image_1.jpg);"></a>
                             <div class="text">
                                 <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the
                                     blind texts</a></h3>
@@ -292,7 +304,7 @@
                                 <div class="meta">
                                     <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
                                     <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    <div><a href="{% url 'comment' %}"><span class="icon-chat"></span> 19</a></div>
                                 </div>
                             </div>
                         </div>
@@ -304,7 +316,7 @@
                                 <div class="meta">
                                     <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
                                     <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    <div><a href="{% url 'comment' %}"><span class="icon-chat"></span> 19</a></div>
                                 </div>
                             </div>
                         </div>
@@ -343,7 +355,7 @@
                     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script>
                         All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i>
-                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        by <a href="https://colorlib.com" target="_blank">Mariam Binte Mahfuz</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                 </div>
             </div>

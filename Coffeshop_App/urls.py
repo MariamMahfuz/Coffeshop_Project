@@ -8,4 +8,10 @@ urlpatterns = [
     path('comment/', views.comment, name='comment'),
     path('cart/', views.Cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
+    path('service/', views.service, name='service'),
+    path('about/', views.about, name='about'),
+    path('shop/', views.Shop, name='shop'),
+    path('single_product/', views.Single_product, name='single_product'),
+    path('contact/', views.Contact, name='contact'),
+    path('blog/', views.Blog, name='blog'),
 ]

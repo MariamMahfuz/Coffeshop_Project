@@ -41,20 +41,20 @@
                 {% if request.user.is_authenticated %}
                     <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="{% url 'menu' %}" class="nav-link">Menu</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="{% url 'service' %}" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Shop</a>
-                            <a class="dropdown-item" href="#">Single Product</a>
+                            <a class="dropdown-item" href="{% url 'shop' %}">Shop</a>
+                            <a class="dropdown-item" href="{% url 'single_product' %}">Single Product</a>
                             <a class="dropdown-item" href="{% url 'cart' %}">Cart</a>
                             <a class="dropdown-item" href="{% url 'checkout' %}">Checkout</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
@@ -67,7 +67,8 @@
                     </li>
                     <li class="nav-item cart"><a href="{% url 'cart' %}" class="nav-link"><span
                             class="icon icon-shopping_cart"></span><span
-                            class="bag d-flex justify-content-center align-items-center"id="digit"><small>1</small></span></a>
+                            class="bag d-flex justify-content-center align-items-center"
+                            id="digit"><small>{{ count }}</small></span></a>
                     </li>
                 {% else %}
                     <li class="nav-item"><a href="{% url 'login_user' %}" class="nav-link">Login</a></li>
@@ -112,6 +113,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{% static 'js/google-map.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
 
 </body>
 </html>

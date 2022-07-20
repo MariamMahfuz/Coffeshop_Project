@@ -1,4 +1,5 @@
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"
+      xmlns="http://www.w3.org/1999/html">
 
 <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
 
@@ -322,8 +323,6 @@
                     <div class="col-md-3 ">
                         <div class="menu-entry">
                             <center>
-
-
                                 <a href="#" class="img"><img src="/media/{{ x.product_photo }}"
                                                              style="width: 70%;height: 100%;"></a>
                             </center>
@@ -333,8 +332,14 @@
                                 <p>{{ x.product_details }}</p>
                                 <p class="price"><span>${{ x.product_price }}</span></p>
                                 <p>
-                                    <a onclick="handleAddToCart( x )"
-                                       class="btn btn-primary btn-outline-primary" id="adding_cart">Add to Cart</a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="add_to_cart">
+
+                                    <input type="hidden" name="id" value="{{ x.id }}">
+                                    <input type="submit" class="btn btn-primary btn-outline-primary" id="adding_cart"
+                                           value="Add To Cart">
+                                </form>
                                 </p>
                             </div>
                         </div>
@@ -383,7 +388,7 @@
         </div>
     </section>
 
-    <section class="ftco-menu bg-dark pb-5">
+    <section class="ftco-menu bg-dark pb-5" style="background-image: url({% static 'img/bg_4.jpg' %});">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 heading-section text-center ftco-animate">
@@ -429,9 +434,9 @@
                                                         <p>{{ x.main_dish_description }}</p>
                                                         <p class="price"><span>${{ x.main_dish_price }}</span>
                                                         </p>
-                                                        <p><a href="#"
-                                                              class="btn btn-primary btn-outline-primary">Add
-                                                            to cart</a></p>
+                                                        <p type="submit"
+                                                           class="btn btn-primary btn-outline-primary">Add
+                                                            to cart</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -451,9 +456,8 @@
                                                         <h3><a href="#">{{ x.drinks_name }}</a></h3>
                                                         <p>{{ x.drinks_description }}</p>
                                                         <p class="price"><span>${{ x.drinks_price }}</span></p>
-                                                        <p><a href="#"
-                                                              class="btn btn-primary btn-outline-primary">Add
-                                                            to cart</a></p>
+                                                        <p class="btn btn-primary btn-outline-primary">Add
+                                                            to cart</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -474,9 +478,9 @@
                                                         <p>{{ x.dessert_descrtipion }}</p>
                                                         <p class="price"><span>${{ x.dessert_price }}</span>
                                                         </p>
-                                                        <p><a href="#"
-                                                              class="btn btn-primary btn-outline-primary">Add
-                                                            to cart</a></p>
+                                                        <p
+                                                                class="btn btn-primary btn-outline-primary">Add
+                                                            to cart </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -506,8 +510,7 @@
             </div>
         </div>
 
-        {#==================================carousel may include
-        here============================================================#}
+        {#==================================carousel may include here============================================================#}
         <div class="container-wrap">
             <div class="row d-flex no-gutters">
                 {% for x in customer_says %}
@@ -656,7 +659,7 @@
                                 <div class="meta">
                                     <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
                                     <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    <div><a href="{% url 'comment' %}"><span class="icon-chat"></span> 19</a></div>
                                 </div>
                             </div>
                         </div>
@@ -668,7 +671,7 @@
                                 <div class="meta">
                                     <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
                                     <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    <div><a href="{% url 'comment' %}"><span class="icon-chat"></span> 19</a></div>
                                 </div>
                             </div>
                         </div>
@@ -730,48 +733,5 @@
                     stroke="#F96D00"/>
         </svg>
     </div>
-{#    {% block js_block %}#}
-{#        <script>#}
-{#            {#}
-{#                #const#}
-{#                add_Cart = document.getElementById("adding_cart");#}
-{#                ##}
-{#            }#}
-{#            {#}
-{#                #add_Cart.addEventListener('click', function () {#}
-{#                    ##}
-{#                }#}
-{#                {#}
-{#                    #    const#}
-{#                    number = parseInt(document.getElementById("digit").innerText);#}
-{#                    ##}
-{#                }#}
-{#                {#}
-{#                    #    console.log(number);#}
-{#                    ##}
-{#                }#}
-{#                {#}
-{#                    #    console.log(number);#}
-{#                    ##}
-{#                }#}
-{#                {#}
-{#                    #    number.innerHTML = number + 1;#}
-{#                    ##}
-{#                }#}
-{#                {#}
-{#                    ##}
-{#                }#}
-{#            )#}
-{#                ##}
-{#            }#}
-{##}
-{#            const addBtns = document.querySelectorAll('.adding_cart')#}
-{#            console.log(addBtns)#}
-{##}
-{#            function handleAddToCart(product) {#}
-{#                console.log(product)#}
-{#            }#}
-{#        </script>#}
-{#    {% endblock %}#}
 {% endblock %}
 

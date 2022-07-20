@@ -142,13 +142,60 @@ class CartSubTotal(models.Model):
     def __str__(self):
         return str(self.Total)
 
+
 class Billing_Details(models.Model):
-    firstname=models.CharField(max_length=50,null=False,blank=False)
+    firstname = models.CharField(max_length=50, null=False, blank=False)
     lastname = models.CharField(max_length=50, null=False, blank=False)
-    state=models.CharField(max_length=30)
-    street=models.CharField(max_length=50,null=False,blank=False)
+    state = models.CharField(max_length=30)
+    street = models.CharField(max_length=50, null=False, blank=False)
     apartment = models.CharField(max_length=200, null=False, blank=False)
-    town=models.CharField(max_length=50,null=False,blank=False)
+    town = models.CharField(max_length=50, null=False, blank=False)
     postcode = models.CharField(max_length=50, null=False, blank=False)
-    phone=models.CharField(max_length=13,blank=False,null=False)
-    email=models.EmailField(null=False,blank=True)
+    phone = models.CharField(max_length=13, blank=False, null=False)
+    email = models.EmailField(null=False, blank=True)
+    direct_bank_payment=models.CharField(max_length=40,null=True)
+    cash_on_delivery=models.CharField(max_length=40,null=True)
+    paypal_payment=models.CharField(max_length=40,null=True)
+
+    def __str__(self):
+        return str(self.firstname)
+
+
+class state_area(models.Model):
+    states = models.CharField(max_length=30, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.states)
+
+
+class Temp_cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Best_selling_product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.product_id)
+
+class Product_Detail(models.Model):
+    Product_photo=models.ImageField(upload_to='media')
+    Product_name=models.CharField(max_length=50,null=False)
+    Product_price=models.CharField(max_length=5, null=False)
+    Product_detail= models.CharField(max_length=5000, null=False)
+
+    def __str__(self):
+        return str(self.Product_name)
+
+class Contact_info(models.Model):
+    address=models.CharField(max_length=150)
+    phone=models.CharField(max_length=12,null=True)
+    email_address=models.EmailField(null=True)
+    website=models.URLField(null=True)
+    def __str__(self):
+        return str(self.address)
+
+class Mail(models.Model):
+    name=models.CharField(max_length=100,null=True)
+    email_address = models.EmailField(null=True)
+    subject = models.CharField(max_length=150, null=True)
+    message = models.CharField(max_length=1000, null=True)
+    def __str__(self):
+        return str(self.name)
